@@ -19,9 +19,20 @@ const MessageSchema: Schema<Message> = new Schema({
 
 export interface User extends Document {
   email: string;
+  username: string;
   password: string;
   verifyCode: string;
   verifyCodeExpiry: Date;
   isAcceptingMessage: boolean;
   message: Message[];
 }
+
+const UserSchema: Schema<User> = new Schema({
+  username: {
+    type: String,
+    required: [true, "Username is required"],
+    trim: true,
+    unique: true,
+  },
+  email: {},
+});
